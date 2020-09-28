@@ -1,103 +1,173 @@
-import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import React, { useState } from "react";
+import PCard from "./PCard";
 
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: "white",
-    backgroundColor: "#ff9f00",
-    "&:hover": {
-      backgroundColor: "#ff9f00",
+const Redmi_Note = "Redmi Note";
+const MI_PHONES = "MI Phones";
+
+export default function Products({ setCart, cart }) {
+  const [products] = useState([
+    {
+      category: MI_PHONES,
+      id: 1042,
+      name: "Premium Chiroti-25kg.png",
+      description: "",
+      image: require("../assets/PremiumChiroti-25kg.png"),
+      cost: 1035,
+      ratings: "3.5",
     },
-  },
-}))(Button);
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: "auto",
-    maxWidth: 500,
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: "auto",
-    display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%",
-  },
-  cartButton: {
-    width: 150,
-    padding: 10,
-    color: "white",
-  },
-}));
+    {
+      category: MI_PHONES,
+      id: 1043,
+      name: "ice-Special Maida-50kg",
+      description: " ",
+      image: require("../assets/ice-SpecialMaida-50kg.png"),
+      cost: 1890,
+      ratings: "4",
+    },
 
-const ProductList = ({ id, name, description, img, price, addtoCart }) => {
-  const classes = useStyles();
+    {
+      category: MI_PHONES,
+      id: 1044,
+      name: "Orange Premium Maida-50kg",
+      description: "",
+      image: require("../assets/Orange-Premium-Maida-50kg.png"),
+      cost: 1980,
+      ratings: "4.8",
+    },
+
+    {
+      category: Redmi_Note,
+      id: 1045,
+      name: "Premium Chiroti-50kg",
+      description: "6 GB RAM | 128 GB ROM | Expandable Upto 512 GB",
+      image: require("../assets/PremiumChiroti-50kg.png"),
+      cost: 2070,
+      ratings: "3.2",
+    },
+
+    {
+      category: Redmi_Note,
+      id: 1046,
+      name: "Premium Maida 25kg",
+      description: "4 GB RAM | 64 GB ROM | Expandable Upto 512 GB",
+      image: require("../assets/Premium-Maida25kg.png"),
+      cost: 1080,
+      ratings: "3.5",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Premium Maida-50kg",
+      description: "6 GB RAM | 128 GB ROM",
+      image: require("../assets/Premium-Maida-50kg.png"),
+      cost: 1980,
+      ratings: "4",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Premium R Atta 25kg",
+      description: "",
+      image: require("../assets/Premium-R-Atta-25kg.png"),
+      cost: 900,
+      ratings: "4",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Premium R Atta 50kg",
+      description: "",
+      image: require("../assets/Premium-R-Atta-50kg.png"),
+      cost: 1800,
+      ratings: "4",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Premium Suji 25kg",
+      description: "",
+      image: require("../assets/Premium-Suji-25kg.png"),
+      cost: 1080,
+      ratings: "4",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Premium Suji 50kg",
+      description: "",
+      image: require("../assets/Premium-Suji-50kg.png"),
+      cost: 2070,
+      ratings: "4",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Special Maida 25kg",
+      description: "",
+      image: require("../assets/Special-Maida-25kg.png"),
+      cost: 450,
+      ratings: "4",
+    },
+    {
+      category: Redmi_Note,
+      id: 1044,
+      name: "Special Maida 50kg",
+      description: "",
+      image: require("../assets/Special-Maida-50kg.png"),
+      cost: 1035,
+      ratings: "4",
+    },
+  ]);
+
+  const addToCart = (product) => {
+    let newCart = [...cart];
+    let itemInCart = newCart.find((item) => product.name === item.name);
+    if (itemInCart) {
+      itemInCart.quantity++;
+    } else {
+      itemInCart = {
+        ...product,
+        quantity: 1,
+      };
+      newCart.push(itemInCart);
+    }
+    setCart(newCart);
+  };
+
+  const [category, setCategory] = useState(Redmi_Note);
+
+  const getProductsInCategory = () => {
+    return products.filter((product) => product.category === category);
+  };
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt="complex"
-                src={img}
-                //"https://i.gadgets360cdn.com/products/large/1553055484_635_Samsung_Galaxy_A20_DB.jpg?downsize=*:180&output-quality=80"
-              />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
-                  {name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  ID:{id}
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {description}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <ColorButton
-                  className={classes.cartButton}
-                  startIcon={<AddShoppingCartIcon />}
-                  variant="contained"
-                  color="primary"
-                  onClick={() =>
-                    addtoCart({ id, name, description, img, price, units: 1 })
-                  }
-                >
-                  Add to cart
-                </ColorButton>
-                {/* <Typography variant="body2" style={{ cursor: 'pointer', backgroundColor:"#ff9f00", width:80, padding: 10 }}>
-                  Add to cart
-                </Typography> */}
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Typography variant="subtitle1">₹{price}</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
+    <>
+      {/* <h1>Products</h1>
+      Select a category
+      <select onChange={(e) => setCategory(e.target.value)}>
+        <option value={Redmi_Note}>{Redmi_Note}</option>
+        <option value={MI_PHONES}>{MI_PHONES}</option>
+      </select> */}
+      <div className="products">
+        {products.map((product, idx) => (
+          // <div className="product" key={idx}>
+          //   <h3>{product.name}</h3>
+          //   <h4>${product.cost}</h4>
+          //   <img src={product.image} alt={product.name} />
+          //   <button onClick={() => addToCart(product)}>Add to Cart</button>
+          // </div>
+          <PCard
+            id={product.id}
+            name={product.name}
+            description={product.description}
+            img={product.image}
+            price={product.cost}
+            onClick={() => addToCart(product)}
+            rating={product.ratings}
+          />
+        ))}
+      </div>
+    </>
   );
-};
-
-export default ProductList;
+}
