@@ -20,10 +20,10 @@ const StyledBadge = withStyles((theme) => ({
 const NavBar = ({ cartTotal, onClick }) => {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar>
         <ToolBar>
           <Typography variant="h5" color="inherit">
-            Vikek Agro Foods
+            Vivek Agro Foods
           </Typography>
           <IconButton
             style={{

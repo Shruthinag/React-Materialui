@@ -3,6 +3,7 @@ import "./App.css";
 import Products from "./components/ProductList";
 import Cart from "./components/CartList";
 import NavBar from "./components/NavBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const PAGE_PRODUCTS = "products";
 const PAGE_CART = "cart";
@@ -25,15 +26,16 @@ function App() {
         cartTotal={getCartTotal()}
         onClick={() => navigateTo(PAGE_CART)}
       />
-      <header>
-        {/* <button onClick={() => navigateTo(PAGE_CART)}>
-          Go to Cart ({getCartTotal()})
-        </button> */}
+      <Toolbar id="back-to-top-anchor" />
 
-        <button onClick={() => navigateTo(PAGE_PRODUCTS)}>View Products</button>
-      </header>
       {page === PAGE_PRODUCTS && <Products cart={cart} setCart={setCart} />}
-      {page === PAGE_CART && <Cart cart={cart} setCart={setCart} />}
+      {page === PAGE_CART && (
+        <Cart
+          cart={cart}
+          setCart={setCart}
+          productsOnCLick={() => navigateTo(PAGE_PRODUCTS)}
+        />
+      )}
     </div>
   );
 }

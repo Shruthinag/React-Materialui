@@ -2,7 +2,7 @@ import React from "react";
 
 import CountButton from "./CountButton";
 
-export default function Cart({ cart, setCart }) {
+export default function Cart({ cart, setCart, productsOnCLick }) {
   const getTotalSum = () => {
     return cart.reduce((sum, { cost, quantity }) => sum + cost * quantity, 0);
   };
@@ -23,6 +23,13 @@ export default function Cart({ cart, setCart }) {
 
   return (
     <>
+      <header>
+        {/* <button onClick={() => navigateTo(PAGE_CART)}>
+          Go to Cart ({getCartTotal()})
+        </button> */}
+        <button onClick={productsOnCLick}>View Products</button>
+      </header>
+
       <h1>Cart</h1>
       {cart.length > 0 && <button onClick={clearCart}>Clear Cart</button>}
       <div className="products">
