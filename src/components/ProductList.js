@@ -57,7 +57,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1047,
       name: "Premium Maida-50kg",
       description: "6 GB RAM | 128 GB ROM",
       image: require("../assets/Premium-Maida-50kg.png"),
@@ -66,7 +66,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1048,
       name: "Premium R Atta 25kg",
       description: "",
       image: require("../assets/Premium-R-Atta-25kg.png"),
@@ -75,7 +75,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1049,
       name: "Premium R Atta 50kg",
       description: "",
       image: require("../assets/Premium-R-Atta-50kg.png"),
@@ -84,7 +84,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1050,
       name: "Premium Suji 25kg",
       description: "",
       image: require("../assets/Premium-Suji-25kg.png"),
@@ -93,7 +93,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1051,
       name: "Premium Suji 50kg",
       description: "",
       image: require("../assets/Premium-Suji-50kg.png"),
@@ -102,7 +102,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1052,
       name: "Special Maida 25kg",
       description: "",
       image: require("../assets/Special-Maida-25kg.png"),
@@ -111,7 +111,7 @@ export default function Products({ setCart, cart }) {
     },
     {
       category: Redmi_Note,
-      id: 1044,
+      id: 1053,
       name: "Special Maida 50kg",
       description: "",
       image: require("../assets/Special-Maida-50kg.png"),
@@ -159,6 +159,7 @@ export default function Products({ setCart, cart }) {
           // </div>
           <PCard
             id={product.id}
+            key={idx}
             name={product.name}
             description={product.description}
             img={product.image}
