@@ -1,11 +1,22 @@
 import React from "react";
+
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 
-import CountButton from "./CountButton";
+import CartPCard from "./CartPCard";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function Cart({ cart, setCart, productsOnCLick }) {
+  const classes = useStyles();
   const getTotalSum = () => {
     return cart.reduce((sum, { cost, quantity }) => sum + cost * quantity, 0);
   };
@@ -42,34 +53,52 @@ export default function Cart({ cart, setCart, productsOnCLick }) {
         {/* <button onClick={() => navigateTo(PAGE_CART)}>
           Go to Cart ({getCartTotal()})
         </button> */}
-        <button onClick={productsOnCLick}>View Products</button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          startIcon={<ArrowBackIcon />}
+          onClick={productsOnCLick}
+        >
+          Back to Products
+        </Button>
+        {/* <button onClick={productsOnCLick}>View Products</button> */}
       </header>
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="sm">
           <Paper elevation={3}>
-            <h1>Cart</h1>
-            {cart.length > 0 && <button onClick={clearCart}>Clear Cart</button>}
+            <h1>Shopping Cart</h1>
+            <h3>Total Cost: ₹{getTotalSum()}</h3>
+            {cart.length > 0 && (
+              <Button variant="contained" color="primary">
+                Checkout
+              </Button>
+            )}
+            {cart.length > 0 && (
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+                onClick={clearCart}
+              >
+                Clear Cart
+              </Button>
+            )}
             <div className="products">
               {cart.map((product, idx) => (
-                <div className="product" key={idx}>
-                  <h3>{product.name}</h3>
-                  <h4>₹{product.cost}</h4>
-                  {/* <input
-              size={4}
-              value={product.quantity}
-              onChange={(e) => setQuantity(product, parseInt(e.target.value))}
-            /> */}
-                  <CountButton
-                    count={product.quantity}
-                    incrementClick={() => increaseQuantity(product)}
-                    decrementClick={() => decreaseQuantity(product)}
-                  />
-                  <img height={100} src={product.image} alt={product.name} />
-                  <button onClick={() => removeFromCart(product)}>
-                    Remove
-                  </button>
-                </div>
+                <CartPCard
+                  key={idx}
+                  name={product.name}
+                  description={product.cost}
+                  img={product.image}
+                  price={product.cost}
+                  rating={product.quantity}
+                  quantity={product.quantity}
+                  onRemoveClick={() => removeFromCart(product)}
+                  incrementClick={() => increaseQuantity(product)}
+                  decrementClick={() => decreaseQuantity(product)}
+                />
               ))}
             </div>
           </Paper>
@@ -77,7 +106,6 @@ export default function Cart({ cart, setCart, productsOnCLick }) {
       </React.Fragment>
 
       <br />
-      <h4>Total Cost: ₹{getTotalSum()}</h4>
     </>
   );
 }
