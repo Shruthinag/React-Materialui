@@ -316,7 +316,7 @@ export default function Products({ setCart, cart }) {
               description={product.description}
               img={product.image}
               price={product.cost}
-              onClick={(fil, event) => addToCart(fil, event)}
+              onClick={() => addToCart(product)}
               rating={product.ratings}
             />
           ))}
