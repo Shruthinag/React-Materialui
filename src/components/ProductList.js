@@ -251,7 +251,6 @@ export default function Products({ setCart, cart }) {
         filterObj.categoryName
       ].filter((item) => item !== event.target.name);
     }
-    console.log(newAppliedFilter);
     setAppliedFilter(newAppliedFilter);
     filterProducts();
   };
